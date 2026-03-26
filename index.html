@@ -315,6 +315,7 @@
             overflow: hidden;
             position: relative;
             margin-top: 25px;
+            padding: 0 5px;
             mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
             -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
         }
@@ -323,6 +324,8 @@
             position: relative;
             transform: translateY(60px);
             transition: transform 0.5s ease-out;
+            text-align: center;
+            direction: ltr;
         }
 
         .lyrics-scroll p {
@@ -332,13 +335,17 @@
             text-shadow: none;
             font-weight: bold;
             transition: all 0.3s;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+            padding: 0 10px;
         }
 
         .lyrics-scroll p.active {
             color: #fff;
             font-size: 1.4rem;
             text-shadow: 0 0 15px rgba(208, 107, 255, 0.8);
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
 
         /* Mobile Optimization */
