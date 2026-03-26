@@ -545,6 +545,48 @@
     </div>
 
     <script>
+        // --- Init Config Text ---
+        function t(str) {
+            if(!str) return "";
+            if (typeof SITE_CONFIG === 'undefined') return str;
+            return str.replace(/{name}/g, SITE_CONFIG.girlfriendName || "")
+                      .replace(/{petName}/g, SITE_CONFIG.petName || "")
+                      .replace(/{boyName}/g, SITE_CONFIG.boyName || "");
+        }
+
+        function initSiteText() {
+            if (typeof SITE_CONFIG === 'undefined') return;
+
+            const ids = [
+                's1_title', 's1_p', 's1_btnYes', 's1_btnNo',
+                's2_title', 's2_p', 's2_btn',
+                'v1_title', 'v1_p', 'v1_btnYes', 'v1_btnNo',
+                'v2_title', 'v2_p', 'v2_btnA', 'v2_btnB',
+                'v3a_title', 'v3a_p', 'v3a_btn1', 'v3a_btn2',
+                'v3b_title', 'v3b_p', 'v3b_btn1', 'v3b_btn2',
+                'vp_title', 'vp_p', 'vp_btnYes', 'vp_btnNo',
+                'vm_title', 'vm_p', 'vm_btn',
+                've_title', 've_btn',
+                's3_title', 's3_p', 's3_btnYes', 's3_btnNo',
+                's4_title', 's4_p'
+            ];
+
+            ids.forEach(id => {
+                let el = document.getElementById(id);
+                if (el && SITE_CONFIG[id]) el.innerHTML = t(SITE_CONFIG[id]); // innerHTML allows emojis
+            });
+
+            document.querySelectorAll('.val-gfName').forEach(el => el.innerText = SITE_CONFIG.girlfriendName || "");
+            document.querySelectorAll('.val-petName').forEach(el => el.innerText = SITE_CONFIG.petName || "");
+            document.querySelectorAll('.val-boyName').forEach(el => el.innerText = SITE_CONFIG.boyName || "");
+            
+            if(SITE_CONFIG.bgVideo) {
+                let bgv = document.getElementById('bg-video');
+                if (bgv) bgv.src = SITE_CONFIG.bgVideo;
+            }
+        }
+        initSiteText();
+
         // Generate floating background elements
         const bgContainer = document.getElementById('hearts-bg');
 
