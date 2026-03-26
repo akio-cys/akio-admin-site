@@ -49,10 +49,17 @@
         <summary>الأساسيات والوسائط (صور وفيديو)</summary>
         <div class="inner-settings">
             <div class="row">
-        <div style="flex:1;"><label>اسم الحبيبة (أو الصديقة):</label><input type="text" id="gfName" placeholder="مثال: اسم البنت"></div>
-        <div style="flex:1;"><label>اسم الدلع:</label><input type="text" id="petName" placeholder="مثال: دلعها"></div>
-        <div style="flex:1;"><label>اسم الحبيب (أنت):</label><input type="text" id="boyName" placeholder="مثال: اسمك"></div>
-    </div>        </div>
+                <div style="flex:1;"><label>اسم الحبيبة (أو الصديقة):</label><input type="text" id="gfName" placeholder="مثال: اسم البنت"></div>
+                <div style="flex:1;"><label>اسم الدلع:</label><input type="text" id="petName" placeholder="مثال: دلعها"></div>
+                <div style="flex:1;"><label>اسم الحبيب (أنت):</label><input type="text" id="boyName" placeholder="مثال: اسمك"></div>
+            </div>
+            
+            <div class="form-group row" style="margin-top:20px;">
+                <div style="flex:1;">
+                    <label>عنوان الرابط والموقع (يظهر في أعلى المتصفح):</label>
+                    <input type="text" id="pageTitle" value="مفاجأة 🎁" placeholder="مثال: إلى حبيبتي...">
+                </div>
+            </div>
 
             <div class="form-group row">
                 <div>
@@ -289,6 +296,7 @@
 
         let content = `const SITE_CONFIG = {
     // الأساسيات
+    pageTitle: "${escapeJS(document.getElementById('pageTitle') ? document.getElementById('pageTitle').value : 'مفاجأة 🎁')}",
     girlfriendName: "${escapeJS(document.getElementById('gfName').value)}",
     petName: "${escapeJS(document.getElementById('petName').value)}",
     boyName: "${escapeJS(document.getElementById('boyName').value)}",
@@ -493,19 +501,26 @@
             let commitData = await commitRes.json();
             let baseTreeSha = commitData.tree.sha;
 
-            status.innerHTML = "✅ جاري تكوين هيكل الموقع لارساله للزبون (شبه انتهينا)... 🚀";
+            status.innerHTML = "✅ جاري رفع الملفات وتكوين الموقع (قد يستغرق وقتاً للملفات الكبيرة)... 🚀";
             
-            // Fetch multiple blobs concurrently to prevent slow network hanging!
-            let tree = await Promise.all(filesToUpload.map(async (f) => {
+            // Upload sequentially to avoid mobile browser memory/network timeout crashes
+            let tree = [];
+            for (let i = 0; i < filesToUpload.length; i++) {
+                let f = filesToUpload[i];
+                status.innerHTML = `🚀 جاري رفع الملف (${i + 1} من ${filesToUpload.length})... الرجاء الانتظار ⏳`;
                 let blobRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/git/blobs`, {
                     method: 'POST',
                     headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
                     body: JSON.stringify({ content: f.content, encoding: 'base64' })
                 });
-                if (!blobRes.ok) throw new Error("عطل أثناء رفع أحد الملفات الدسمة! حاول تقليل حجم الفيديو.");
+                if (!blobRes.ok) {
+                    let errText = await blobRes.text();
+                    console.error("Blob upload error:", errText);
+                    throw new Error(`عطل أثناء رفع الملف (${f.path})! تأكد من استقرار الإنترنت لديك أو حاول تقليل حجم الفيديو.`);
+                }
                 let blobSha = (await blobRes.json()).sha;
-                return { path: f.path, mode: '100644', type: 'blob', sha: blobSha };
-            }));
+                tree.push({ path: f.path, mode: '100644', type: 'blob', sha: blobSha });
+            }
 
             let treeRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/git/trees`, {
                 method: 'POST',
