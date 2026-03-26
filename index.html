@@ -404,14 +404,14 @@
     <!-- Screen 1: Identity -->
     <div id="screen-1" class="container active">
         <h1 id="s1_title">سؤال مهم... 💜</h1>
-        <p id="s1_p">أنتِ حبيبتي <span class="val-gfName">شموس</span>؟</p>
+        <p id="s1_p">أنتِ حبيبتي <span class="val-gfName">[اسم الحبيبة]</span>؟</p>
         <button id="s1_btnYes" class="btn" onclick="nextScreen(2)">نعم</button>
-        <button id="s1_btnNo" class="btn btn-danger" onclick="fail((typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.s1_failMsg) ? t(SITE_CONFIG.s1_failMsg) : 'جذابة انتي مو ' + (typeof SITE_CONFIG !== 'undefined' ? SITE_CONFIG.girlfriendName : 'شموس') + '!')">لا</button>
+        <button id="s1_btnNo" class="btn btn-danger" onclick="fail((typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.s1_failMsg) ? t(SITE_CONFIG.s1_failMsg) : 'جذابة انتي مو ' + (typeof SITE_CONFIG !== 'undefined' ? SITE_CONFIG.girlfriendName : '[اسم الحبيبة]') + '!')">لا</button>
     </div>
 
     <!-- Screen 2: Birthday -->
     <div id="screen-2" class="container">
-        <h1 id="s2_title">شلون اعرفج انتي <span class="val-gfName">شموس</span>؟ </h1>
+        <h1 id="s2_title">شلون اعرفج انتي <span class="val-gfName">[اسم الحبيبة]</span>؟ </h1>
         <p id="s2_p">اكتبي تاريخ ميلادج</p>
         <div class="date-selectors">
             <select id="day">
@@ -430,7 +430,7 @@
     <!-- Screen Video-Q1 -->
     <div id="screen-video-1" class="container">
         <h1 id="v1_title">سؤال... 💜</h1>
-        <p id="v1_p">حبيبتي <span class="val-gfName">شموس</span> احب انو نطلع ديت الاسبوع الجاي نتفق على يوم، موافقة لو لا؟</p>
+        <p id="v1_p">حبيبتي <span class="val-gfName">[اسم الحبيبة]</span> عندي اقتراح بسيط، موافقة لو لا؟</p>
         <button id="v1_btnYes" class="btn" onclick="switchScreen('screen-video-1', 'screen-video-2')">موافقة</button>
         <button id="v1_btnNo" class="btn btn-danger" onclick="hideVideoAndFailCustom((typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.v1_failMsg) ? t(SITE_CONFIG.v1_failMsg) : 'يلا ولي!')">لا</button>
     </div>
@@ -438,25 +438,25 @@
     <!-- Screen Video-Q2 -->
     <div id="screen-video-2" class="container">
         <h1 id="v2_title">عظيم! 👾</h1>
-        <p id="v2_p">شنو رايج نكعد بتيراس لو نفتر؟</p>
-        <button id="v2_btnA" class="btn" onclick="switchScreen('screen-video-2', 'screen-video-3a')">تيراس</button>
-        <button id="v2_btnB" class="btn" onclick="switchScreen('screen-video-2', 'screen-video-3b')">نفتر</button>
+        <p id="v2_p">شنو رايج نختار الخيار (أ) لو الخيار (ب)؟</p>
+        <button id="v2_btnA" class="btn" onclick="switchScreen('screen-video-2', 'screen-video-3a')">خيار أ</button>
+        <button id="v2_btnB" class="btn" onclick="switchScreen('screen-video-2', 'screen-video-3b')">خيار ب</button>
     </div>
 
-    <!-- Screen Video-Q3A (Terrace) -->
+    <!-- Screen Video-Q3A (Choice A) -->
     <div id="screen-video-3a" class="container">
         <h1 id="v3a_title">حلو! 🦦</h1>
-        <p id="v3a_p">شنو تحبين تاكلين؟</p>
-        <button id="v3a_btn1" class="btn" onclick="finishVideoFlow('screen-video-3a')">كرواسون بالكاكاو</button>
-        <button id="v3a_btn2" class="btn" onclick="finishVideoFlow('screen-video-3a')">كرواسون بالكريم</button>
+        <p id="v3a_p">بما أنج اخترتي (أ)، شنو تفضلين الآن؟</p>
+        <button id="v3a_btn1" class="btn" onclick="finishVideoFlow('screen-video-3a')">شيء 1</button>
+        <button id="v3a_btn2" class="btn" onclick="finishVideoFlow('screen-video-3a')">شيء 2</button>
     </div>
 
-    <!-- Screen Video-Q3B (Walk) -->
+    <!-- Screen Video-Q3B (Choice B) -->
     <div id="screen-video-3b" class="container">
         <h1 id="v3b_title">خوش فكرة! 🗿</h1>
-        <p id="v3b_p">وين نفتر؟</p>
-        <button id="v3b_btn1" class="btn" onclick="finishVideoFlow('screen-video-3b')">فوك قسمنا</button>
-        <button id="v3b_btn2" class="btn" onclick="finishVideoFlow('screen-video-3b')">بالحرم الجامعي</button>
+        <p id="v3b_p">بما أنج اخترتي (ب)، وين نحب نطبق الفكرة؟</p>
+        <button id="v3b_btn1" class="btn" onclick="finishVideoFlow('screen-video-3b')">المول</button>
+        <button id="v3b_btn2" class="btn" onclick="finishVideoFlow('screen-video-3b')">الحديقة</button>
     </div>
 
     <!-- New Question: Promise -->
@@ -483,7 +483,7 @@
 
     <!-- Screen 3: Love level -->
     <div id="screen-3" class="container">
-        <h1 id="s3_title">حبيبتي <span class="val-petName">شموسة</span> الصاكة القزومة البرنسس الاميرة المجنونة الجميلة الحلوة مالت <span class="val-boyName">اكيو</span> ❤️🩹</h1>
+        <h1 id="s3_title">حبيبتي <span class="val-petName">دلع</span> الصاكة القزومة البرنسس الاميرة المجنونة الجميلة الحلوة مالت <span class="val-boyName">[اسم الحبيب]</span> ❤️🩹</h1>
         <p id="s3_p">انا اموت عليج، وهذني 4 اغاني هدية مني الج، موافقة؟</p>
         <div>
             <button id="s3_btnYes" class="btn" onclick="checkAgree('yes')">موافقة</button>
@@ -494,7 +494,7 @@
     <!-- Screen 4: Success / 4 Gifts Selection -->
     <div id="screen-4" class="container">
         <div class="heart-icon" style="filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8)); color: #ffd700;">🫀</div>
-        <h1 id="s4_title">هدية مني الج <span class="val-gfName">شموس</span> 💜</h1>
+        <h1 id="s4_title">هدية مني الج <span class="val-gfName">[اسم الحبيبة]</span> 💜</h1>
         <p id="s4_p">عندي 4 هدايا (أغاني) الج، اختاري رقم...</p>
 
         <div id="gift-options" style="display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;">
@@ -541,7 +541,7 @@
     <!-- Screen 5: Fail state -->
     <div id="screen-fail" class="container">
         <div style="font-size: 5rem; margin-bottom: 20px;">🛑</div>
-        <h1 class="error-message" id="fail-msg">انتي مو <span class="val-gfName">شموس</span>!</h1>
+        <h1 class="error-message" id="fail-msg">انتي مو <span class="val-gfName">[اسم الحبيبة]</span>!</h1>
     </div>
 
     <script>
@@ -604,7 +604,7 @@
         }
 
         // Transparent name with roses
-        const bgNames = (typeof SITE_CONFIG !== 'undefined') ? SITE_CONFIG.bgNames : ['شموس 💜', '👾 شموستي', 'شميس 🫀', '💌 شمسي', 'Sunray 🦦'];
+        const bgNames = (typeof SITE_CONFIG !== 'undefined') ? SITE_CONFIG.bgNames : ['[اسم الحبيبة] 💜', '👾 دلع', '[اسم الحبيبة] 🫀', '💌 دلع', 'Love 🦦'];
         for (let i = 0; i < 15; i++) {
             let nameEl = document.createElement('div');
             nameEl.innerHTML = bgNames[Math.floor(Math.random() * bgNames.length)];
