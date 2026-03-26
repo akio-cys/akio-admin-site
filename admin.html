@@ -643,6 +643,18 @@
             status.innerHTML = "⚙️ جاري تجهيز إعدادات الزبون (config.js)...";
             filesToUpload.push({ path: 'config.js', content: utf8ToBase64(generateConfigString()) });
 
+            // تحديث index.html تلقائياً - جلب أحدث نسخة من القالب وتحديثها
+            try {
+                status.innerHTML = "📄 جاري تحديث ملف الموقع الرئيسي (index.html) بأحدث نسخة...";
+                let indexRes = await fetch(`https://api.github.com/repos/${tplParts[0]}/${tplParts[1]}/contents/index.html`, {
+                    headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3.raw' }
+                });
+                if (indexRes.ok) {
+                    let indexContent = await indexRes.text();
+                    filesToUpload.push({ path: 'index.html', content: utf8ToBase64(indexContent) });
+                }
+            } catch(e) { console.log("Could not fetch index.html from template, skipping auto-update."); }
+
             // ONLY push custom files heavily uploaded by the user from phone
             const staticFiles = [
                 { name: 'video.mp4', inputId: 'videoFile' },
