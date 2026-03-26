@@ -272,11 +272,20 @@
     function generateConfigString() {
         let bgn = document.getElementById('bgNames').value.split(',').map(s => s.trim());
         
-        let vVal = document.getElementById('videoFile').files[0] ? "video.mp4" : document.getElementById('bgVideo').value;
-        let g1Val = document.getElementById('fileGif1').files[0] ? "1.gif" : document.getElementById('gif1').value;
-        let g2Val = document.getElementById('fileGif2').files[0] ? "2.gif" : document.getElementById('gif2').value;
-        let g3Val = document.getElementById('fileGif3').files[0] ? "3.gif" : document.getElementById('gif3').value;
-        let g4Val = document.getElementById('fileGif4').files[0] ? "4.gif" : document.getElementById('gif4').value;
+        let bgvRaw = document.getElementById('bgVideo').value;
+        let vVal = (document.getElementById('videoFile').files[0] || bgvRaw.includes('📎') || (!bgvRaw.includes('http') && bgvRaw !== '')) ? "video.mp4" : bgvRaw;
+        
+        let g1Raw = document.getElementById('gif1').value;
+        let g1Val = (document.getElementById('fileGif1').files[0] || g1Raw.includes('📎') || (!g1Raw.includes('http') && g1Raw !== '')) ? "1.gif" : g1Raw;
+        
+        let g2Raw = document.getElementById('gif2').value;
+        let g2Val = (document.getElementById('fileGif2').files[0] || g2Raw.includes('📎') || (!g2Raw.includes('http') && g2Raw !== '')) ? "2.gif" : g2Raw;
+
+        let g3Raw = document.getElementById('gif3').value;
+        let g3Val = (document.getElementById('fileGif3').files[0] || g3Raw.includes('📎') || (!g3Raw.includes('http') && g3Raw !== '')) ? "3.gif" : g3Raw;
+
+        let g4Raw = document.getElementById('gif4').value;
+        let g4Val = (document.getElementById('fileGif4').files[0] || g4Raw.includes('📎') || (!g4Raw.includes('http') && g4Raw !== '')) ? "4.gif" : g4Raw;
 
         let content = `const SITE_CONFIG = {
     // الأساسيات
