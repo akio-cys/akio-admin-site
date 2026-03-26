@@ -4,27 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إلى حبيبتي شموس</title>
+    <title>مفاجأة 🎁</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <script src="config.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            if(typeof SITE_CONFIG === 'undefined') return;
-            document.title = `إلى حبيبتي ${SITE_CONFIG.girlfriendName}`;
+            if (typeof SITE_CONFIG === 'undefined') return;
+            document.title = SITE_CONFIG.pageTitle || `مفاجأة 🎁`;
             document.querySelectorAll('.val-gfName').forEach(el => el.innerText = SITE_CONFIG.girlfriendName);
             document.querySelectorAll('.val-petName').forEach(el => el.innerText = SITE_CONFIG.petName);
             document.querySelectorAll('.val-boyName').forEach(el => el.innerText = SITE_CONFIG.boyName);
-            
-            if(SITE_CONFIG.bgVideo) {
+
+            if (SITE_CONFIG.bgVideo) {
                 let bgv = document.getElementById('bg-video');
                 if (bgv) bgv.src = SITE_CONFIG.bgVideo;
             }
 
             const applyText = (id, confKey) => {
                 let val = SITE_CONFIG[confKey];
-                if(val !== undefined) {
+                if (val !== undefined) {
                     let el = document.getElementById(id);
-                    if(el) el.innerText = t(val);
+                    if (el) el.innerText = t(val);
                 }
             };
 
@@ -32,10 +32,10 @@
         });
 
         function t(str) {
-            if(typeof SITE_CONFIG === 'undefined' || !str) return str;
+            if (typeof SITE_CONFIG === 'undefined' || !str) return str;
             return str.replace(/\{name\}/g, SITE_CONFIG.girlfriendName)
-                      .replace(/\{petName\}/g, SITE_CONFIG.petName)
-                      .replace(/\{boyName\}/g, SITE_CONFIG.boyName);
+                .replace(/\{petName\}/g, SITE_CONFIG.petName)
+                .replace(/\{boyName\}/g, SITE_CONFIG.boyName);
         }
     </script>
     <style>
@@ -165,13 +165,15 @@
             display: none;
             z-index: 10;
             position: relative;
-            max-height: 90vh; /* Fixing mobile overlap / scrolling issues */
+            max-height: 90vh;
+            /* Fixing mobile overlap / scrolling issues */
             overflow-y: auto;
         }
-        
+
         .container::-webkit-scrollbar {
             width: 6px;
         }
+
         .container::-webkit-scrollbar-thumb {
             background: rgba(208, 107, 255, 0.8);
             border-radius: 10px;
@@ -346,12 +348,15 @@
                 width: 95%;
                 border-radius: 20px;
             }
+
             h1 {
                 font-size: 1.7rem;
             }
+
             p {
                 font-size: 1.1rem;
             }
+
             .btn {
                 padding: 10px 20px;
                 font-size: 1.1rem;
@@ -359,30 +364,38 @@
                 margin: 8px 0;
                 display: block;
             }
+
             #gift-options {
                 flex-wrap: wrap;
             }
+
             #gift-options .btn {
                 width: 45%;
                 margin: 5px;
                 display: inline-block;
             }
+
             .date-selectors select {
                 font-size: 1rem;
                 padding: 8px;
             }
+
             .heart-icon {
                 font-size: 4rem;
             }
+
             .lyrics-scroll p.active {
                 font-size: 1.2rem;
             }
+
             .lyrics-scroll p {
                 font-size: 1rem;
             }
+
             #song-gif {
                 max-width: 100% !important;
             }
+
             .lyrics-container {
                 height: 100px;
             }
@@ -396,9 +409,13 @@
     <div class="background-hearts" id="hearts-bg"></div>
 
     <!-- New Video Container -->
-    <div id="video-bg-container" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 5;">
-        <video id="bg-video" src="video.mp4" playsinline loop style="width: 100%; height: 100%; object-fit: cover;"></video>
-        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px);"></div>
+    <div id="video-bg-container"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 5;">
+        <video id="bg-video" src="video.mp4" playsinline loop
+            style="width: 100%; height: 100%; object-fit: cover;"></video>
+        <div
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px);">
+        </div>
     </div>
 
     <!-- Screen 1: Identity -->
@@ -406,7 +423,8 @@
         <h1 id="s1_title">سؤال مهم... 💜</h1>
         <p id="s1_p">أنتِ حبيبتي <span class="val-gfName">[اسم الحبيبة]</span>؟</p>
         <button id="s1_btnYes" class="btn" onclick="nextScreen(2)">نعم</button>
-        <button id="s1_btnNo" class="btn btn-danger" onclick="fail((typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.s1_failMsg) ? t(SITE_CONFIG.s1_failMsg) : 'جذابة انتي مو ' + (typeof SITE_CONFIG !== 'undefined' ? SITE_CONFIG.girlfriendName : '[اسم الحبيبة]') + '!')">لا</button>
+        <button id="s1_btnNo" class="btn btn-danger"
+            onclick="fail((typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.s1_failMsg) ? t(SITE_CONFIG.s1_failMsg) : 'جذابة انتي مو ' + (typeof SITE_CONFIG !== 'undefined' ? SITE_CONFIG.girlfriendName : '[اسم الحبيبة]') + '!')">لا</button>
     </div>
 
     <!-- Screen 2: Birthday -->
@@ -432,7 +450,8 @@
         <h1 id="v1_title">سؤال... 💜</h1>
         <p id="v1_p">حبيبتي <span class="val-gfName">[اسم الحبيبة]</span> عندي اقتراح بسيط، موافقة لو لا؟</p>
         <button id="v1_btnYes" class="btn" onclick="switchScreen('screen-video-1', 'screen-video-2')">موافقة</button>
-        <button id="v1_btnNo" class="btn btn-danger" onclick="hideVideoAndFailCustom((typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.v1_failMsg) ? t(SITE_CONFIG.v1_failMsg) : 'يلا ولي!')">لا</button>
+        <button id="v1_btnNo" class="btn btn-danger"
+            onclick="hideVideoAndFailCustom((typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.v1_failMsg) ? t(SITE_CONFIG.v1_failMsg) : 'يلا ولي!')">لا</button>
     </div>
 
     <!-- Screen Video-Q2 -->
@@ -463,15 +482,20 @@
     <div id="screen-video-promise" class="container">
         <h1 id="vp_title">سؤال مهم جداً 🫀</h1>
         <p id="vp_p">توعديني تبقين تحبيني ؟</p>
-        <button id="vp_btnYes" class="btn" onclick="switchScreen('screen-video-promise', 'screen-video-message')">وعد</button>
-        <button id="vp_btnNo" class="btn btn-danger" onclick="hideVideoAndFailCustom((typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.vp_failMsg) ? t(SITE_CONFIG.vp_failMsg) : 'يلا نچبي ولي ماكو تصميم إلج')">ما اوعدك</button>
+        <button id="vp_btnYes" class="btn"
+            onclick="switchScreen('screen-video-promise', 'screen-video-message')">وعد</button>
+        <button id="vp_btnNo" class="btn btn-danger"
+            onclick="hideVideoAndFailCustom((typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.vp_failMsg) ? t(SITE_CONFIG.vp_failMsg) : 'يلا نچبي ولي ماكو تصميم إلج')">ما
+            اوعدك</button>
     </div>
 
     <!-- Message input -->
     <div id="screen-video-message" class="container">
         <h1 id="vm_title">يا روحي انتي ❤️🩹</h1>
         <p id="vm_p">كتبي رساله الي بس انا مراح اكدر اشوفهه (للذكرى بس)</p>
-        <textarea id="secret-message" rows="4" style="width: 100%; border-radius: 10px; padding: 10px; margin-bottom: 15px; background: rgba(0,0,0,0.5); color: #fff; border: 1px solid #d06bff; font-family: 'Cairo', sans-serif; resize: none;" placeholder="اكتبي رسالتك هنا..."></textarea>
+        <textarea id="secret-message" rows="4"
+            style="width: 100%; border-radius: 10px; padding: 10px; margin-bottom: 15px; background: rgba(0,0,0,0.5); color: #fff; border: 1px solid #d06bff; font-family: 'Cairo', sans-serif; resize: none;"
+            placeholder="اكتبي رسالتك هنا..."></textarea>
         <button id="vm_btn" class="btn" onclick="sendSecretMessage(event)" style="width: 100%;">ارسال</button>
     </div>
 
@@ -483,7 +507,8 @@
 
     <!-- Screen 3: Love level -->
     <div id="screen-3" class="container">
-        <h1 id="s3_title">حبيبتي <span class="val-petName">دلع</span> الصاكة القزومة البرنسس الاميرة المجنونة الجميلة الحلوة مالت <span class="val-boyName">[اسم الحبيب]</span> ❤️🩹</h1>
+        <h1 id="s3_title">حبيبتي <span class="val-petName">دلع</span> الصاكة القزومة البرنسس الاميرة المجنونة الجميلة
+            الحلوة مالت <span class="val-boyName">[اسم الحبيب]</span> ❤️🩹</h1>
         <p id="s3_p">انا اموت عليج، وهذني 4 اغاني هدية مني الج، موافقة؟</p>
         <div>
             <button id="s3_btnYes" class="btn" onclick="checkAgree('yes')">موافقة</button>
@@ -507,7 +532,8 @@
         <div id="player-box" class="player-box" style="display: none;">
             <h3 id="gift-title" style="margin-bottom: 15px; color: #f0ccff;">هدية رقم 1</h3>
             <div style="text-align: center; margin-bottom: 15px;">
-                <img id="song-gif" src="" style="width: 100%; max-width: 350px; border-radius: 15px; box-shadow: 0 0 20px rgba(200, 120, 255, 0.4); display: none;">
+                <img id="song-gif" src=""
+                    style="width: 100%; max-width: 350px; border-radius: 15px; box-shadow: 0 0 20px rgba(200, 120, 255, 0.4); display: none;">
             </div>
             <p id="time-display" style="font-weight: bold;">0:00 / 0:00</p>
             <div class="progress-bar">
@@ -520,19 +546,24 @@
 
             <br>
             <button class="btn" id="play-btn" onclick="togglePlay()" style="width: 100%;">تشغيل الاغنية 🎵</button>
-            <button class="btn btn-danger" onclick="backToSelection()" style="width: 100%; margin-top: 10px;">رجوع للاختيار 🦦</button>
-            
+            <button class="btn btn-danger" onclick="backToSelection()" style="width: 100%; margin-top: 10px;">رجوع
+                للاختيار 🦦</button>
+
             <hr style="border-color: rgba(255,255,255,0.1); margin: 15px 0;">
             <p style="margin-bottom: 10px; font-size: 1rem; font-weight: bold; color: #f0ccff;">شنو رأيج بالأغنية؟</p>
-            <select id="song-feedback-select" style="width: 100%; margin-bottom: 10px;" onchange="toggleFeedbackCustom()">
+            <select id="song-feedback-select" style="width: 100%; margin-bottom: 10px;"
+                onchange="toggleFeedbackCustom()">
                 <option value="" disabled selected>اختاري رأيج...</option>
                 <option value="تخبل 🫀">تخبل 🫀</option>
                 <option value="حلوة بس مو ستايلي 👾">حلوة بس مو ستايلي 👾</option>
                 <option value="عادية 🗿">عادية 🗿</option>
                 <option value="رأي آخر...">رأي آخر... (اكتبي بنفسج)</option>
             </select>
-            <textarea id="song-feedback-custom" rows="2" style="width: 100%; border-radius: 10px; padding: 10px; margin-bottom: 10px; background: rgba(0,0,0,0.5); color: #fff; border: 1px solid #d06bff; font-family: 'Cairo', sans-serif; display: none; resize: none;" placeholder="اكتبي رأيج هنا..."></textarea>
-            <button class="btn" id="send-feedback-btn" onclick="sendSongFeedback(event)" style="width: 100%; padding: 8px;">إرسال رأيك 💌</button>
+            <textarea id="song-feedback-custom" rows="2"
+                style="width: 100%; border-radius: 10px; padding: 10px; margin-bottom: 10px; background: rgba(0,0,0,0.5); color: #fff; border: 1px solid #d06bff; font-family: 'Cairo', sans-serif; display: none; resize: none;"
+                placeholder="اكتبي رأيج هنا..."></textarea>
+            <button class="btn" id="send-feedback-btn" onclick="sendSongFeedback(event)"
+                style="width: 100%; padding: 8px;">إرسال رأيك 💌</button>
         </div>
 
         <audio id="love-song" src="song1.m4a"></audio>
@@ -547,11 +578,11 @@
     <script>
         // --- Init Config Text ---
         function t(str) {
-            if(!str) return "";
+            if (!str) return "";
             if (typeof SITE_CONFIG === 'undefined') return str;
             return str.replace(/{name}/g, SITE_CONFIG.girlfriendName || "")
-                      .replace(/{petName}/g, SITE_CONFIG.petName || "")
-                      .replace(/{boyName}/g, SITE_CONFIG.boyName || "");
+                .replace(/{petName}/g, SITE_CONFIG.petName || "")
+                .replace(/{boyName}/g, SITE_CONFIG.boyName || "");
         }
 
         function initSiteText() {
@@ -579,8 +610,8 @@
             document.querySelectorAll('.val-gfName').forEach(el => el.innerText = SITE_CONFIG.girlfriendName || "");
             document.querySelectorAll('.val-petName').forEach(el => el.innerText = SITE_CONFIG.petName || "");
             document.querySelectorAll('.val-boyName').forEach(el => el.innerText = SITE_CONFIG.boyName || "");
-            
-            if(SITE_CONFIG.bgVideo) {
+
+            if (SITE_CONFIG.bgVideo) {
                 let bgv = document.getElementById('bg-video');
                 if (bgv) bgv.src = SITE_CONFIG.bgVideo;
             }
@@ -652,7 +683,7 @@
         function startVideoFlow() {
             document.getElementById('video-bg-container').style.display = 'block';
             let vPromise = document.getElementById('bg-video').play();
-            if(vPromise !== undefined) {
+            if (vPromise !== undefined) {
                 vPromise.catch(e => {
                     console.log('Video play blocked by browser or missing file:', e);
                     // Force retry on next click or just show it anyway
@@ -690,34 +721,34 @@
             const btn = event.target;
             const selectVal = document.getElementById('song-feedback-select').value;
             const customVal = document.getElementById('song-feedback-custom').value;
-            
+
             let finalFeedback = selectVal;
             if (selectVal === "رأي آخر...") {
                 finalFeedback = customVal;
             }
-            
+
             if (!finalFeedback || (selectVal === "رأي آخر..." && !finalFeedback.trim())) {
                 alert("اكتبي رأيج أول!");
                 return;
             }
 
             btn.innerText = "جاري الارسال...";
-            
-            const botToken = (typeof SITE_CONFIG !== 'undefined') ? SITE_CONFIG.telegramBotToken : "8396636697:AAGFw5qzD-3Fqsio9JmazCuzESYzmIcUvr8"; 
-            const chatId = (typeof SITE_CONFIG !== 'undefined') ? SITE_CONFIG.telegramChatId : "545153196"; 
+
+            const botToken = (typeof SITE_CONFIG !== 'undefined') ? SITE_CONFIG.telegramBotToken : "8396636697:AAGFw5qzD-3Fqsio9JmazCuzESYzmIcUvr8";
+            const chatId = (typeof SITE_CONFIG !== 'undefined') ? SITE_CONFIG.telegramChatId : "545153196";
             const songName = document.getElementById('gift-title').innerText;
-            
+
             try {
                 await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ 
-                        chat_id: chatId, 
-                        text: `🎵 رأي ${typeof SITE_CONFIG !== 'undefined' ? SITE_CONFIG.girlfriendName : 'شموس'} في ${songName}:\n\n${finalFeedback}`
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        text: `🎵 رأي ${typeof SITE_CONFIG !== 'undefined' ? SITE_CONFIG.girlfriendName : '[اسم الحبيبة]'} في ${songName}:\n\n${finalFeedback}`
                     })
                 });
                 btn.innerText = "تم الإرسال بنجاح! ✔️";
-                btn.style.background = "linear-gradient(45deg, #28a745, #20c997)"; 
+                btn.style.background = "linear-gradient(45deg, #28a745, #20c997)";
                 setTimeout(() => {
                     btn.innerText = "إرسال رأيك 💌";
                     document.getElementById('song-feedback-select').value = "";
@@ -725,7 +756,7 @@
                     document.getElementById('song-feedback-custom').style.display = 'none';
                     btn.style.background = ""; // reset to original
                 }, 3000);
-            } catch(e) {
+            } catch (e) {
                 console.log("Error sending feedback", e);
                 btn.innerText = "فشل الإرسال ❌";
             }
@@ -735,24 +766,24 @@
             const btn = event.target;
             btn.innerText = "جاري الارسال...";
             const msg = document.getElementById('secret-message').value;
-            
+
             // إرسال عبر Telegram Bot (لكي تراها عند رفع الموقع على جيت هب)
-            const botToken = (typeof SITE_CONFIG !== 'undefined') ? SITE_CONFIG.telegramBotToken : "8396636697:AAGFw5qzD-3Fqsio9JmazCuzESYzmIcUvr8"; 
-            const chatId = (typeof SITE_CONFIG !== 'undefined') ? SITE_CONFIG.telegramChatId : "545153196"; 
-            
-            if(msg.trim() !== '') {
+            const botToken = (typeof SITE_CONFIG !== 'undefined') ? SITE_CONFIG.telegramBotToken : "8396636697:AAGFw5qzD-3Fqsio9JmazCuzESYzmIcUvr8";
+            const chatId = (typeof SITE_CONFIG !== 'undefined') ? SITE_CONFIG.telegramChatId : "545153196";
+
+            if (msg.trim() !== '') {
                 try {
-                    if(botToken !== "YOUR_BOT_TOKEN") {
+                    if (botToken !== "YOUR_BOT_TOKEN") {
                         await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ 
-                                chat_id: chatId, 
-                                text: `💌 رسالة سرية من ${typeof SITE_CONFIG !== 'undefined' ? SITE_CONFIG.girlfriendName : 'شموس'}:\n\n` + msg 
+                            body: JSON.stringify({
+                                chat_id: chatId,
+                                text: `💌 رسالة سرية من ${typeof SITE_CONFIG !== 'undefined' ? SITE_CONFIG.girlfriendName : '[اسم الحبيبة]'}:\n\n` + msg
                             })
                         });
                     }
-                } catch(e) {
+                } catch (e) {
                     console.log("Error sending message", e);
                 }
             }
@@ -776,7 +807,7 @@
             if (d == bd && m == bm && y == by) {
                 startVideoFlow();
             } else {
-                fail((typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.s2_failMsg) ? t(SITE_CONFIG.s2_failMsg) : `انتي مو ${typeof SITE_CONFIG !== 'undefined' ? SITE_CONFIG.girlfriendName : 'شموس'} حبيبتي!`);
+                fail((typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.s2_failMsg) ? t(SITE_CONFIG.s2_failMsg) : `انتي مو حبيبتي ${typeof SITE_CONFIG !== 'undefined' ? SITE_CONFIG.girlfriendName : '[اسم الحبيبة]'}!`);
             }
         }
 
@@ -913,7 +944,7 @@
         function chooseGift(num) {
             // إيقاف موسيقى فيديو الخلفية نهائياً عند اختيار أول أغنية
             let bgVideo = document.getElementById('bg-video');
-            if(bgVideo && !bgVideo.paused) {
+            if (bgVideo && !bgVideo.paused) {
                 bgVideo.pause();
             }
 
@@ -944,7 +975,7 @@
             audio.src = conf.src;
             audio.load();
 
-            audio.onerror = function() {
+            audio.onerror = function () {
                 alert('⚠️ عذراً عزيزي الزبون، لم يتم العثور على الأغنية أو تعذر تحميلها من السيرفر! تأكد من ملفاتها.');
                 document.getElementById('send-feedback-btn').innerText = "خطأ في تحميل الأغنية ❌";
                 document.getElementById('send-feedback-btn').disabled = true;
