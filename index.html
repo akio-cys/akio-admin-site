@@ -829,14 +829,14 @@
         let isPlayingActive = false;
         let activeSongNum = 1;
 
-        const songsConfig = {
+        let songsConfig = {
             1: { src: 'song1.mp3', start: 0, end: null },
             2: { src: 'song2.m4a', start: 25, end: 107, vocalSpeed: 1.15 },
             3: { src: 'song3.mp3', start: 11, end: null, vocalSpeed: 1.15 },
             4: { src: 'song4.m4a', start: 75, end: null, vocalEnd: 155, vocalDelay: 4.70 }
         };
 
-        const lyricsData = {
+        let lyricsData = {
             1: [
                 "كل شي بيا يسألني حبيبي عليك",
                 "عيوني تشتهي تشوفك",
@@ -922,6 +922,56 @@
             ]
         };
 
+        let parsedLrc = { 1: null, 2: null, 3: null, 4: null };
+
+        function parseLrc(lrcString) {
+            let lines = lrcString.split('\n');
+            let parsed = [];
+            let regex = /\[(\d{2}):(\d{2})\.(\d{2,3})\](.*)/;
+            lines.forEach(line => {
+                let match = line.match(regex);
+                if (match) {
+                    let mins = parseInt(match[1]);
+                    let secs = parseInt(match[2]);
+                    let ms = parseInt(match[3]);
+                    if(match[3].length === 2) ms *= 10;
+                    if(match[3].length === 1) ms *= 100;
+                    
+                    let timeVal = (mins * 60) + secs + (ms / 1000);
+                    let text = match[4].trim();
+                    parsed.push({ time: timeVal, text: text });
+                }
+            });
+            return parsed.length > 0 ? parsed : null;
+        }
+
+        if (typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.songsConfig) {
+            for(let i=1; i<=4; i++) {
+                if(SITE_CONFIG.songsConfig[i]) {
+                    songsConfig[i].src = SITE_CONFIG.songsConfig[i].src || songsConfig[i].src;
+                    if(SITE_CONFIG.songsConfig[i].start !== undefined) songsConfig[i].start = parseFloat(SITE_CONFIG.songsConfig[i].start) || 0;
+                    
+                    let eVal = SITE_CONFIG.songsConfig[i].end;
+                    if(eVal !== null && eVal !== "null" && eVal !== "") {
+                        songsConfig[i].end = parseFloat(eVal);
+                    } else {
+                        songsConfig[i].end = null;
+                    }
+                    
+                    let lrcText = SITE_CONFIG.songsConfig[i].lyrics;
+                    if(lrcText && lrcText.trim() !== "") {
+                        let parsed = parseLrc(lrcText);
+                        if(parsed) {
+                            parsedLrc[i] = parsed;
+                            lyricsData[i] = parsed.map(p => p.text);
+                        } else {
+                            lyricsData[i] = lrcText.split('\n').filter(l => l.trim() !== "");
+                        }
+                    }
+                }
+            }
+        }
+
         let currentStartTime = 0;
         let currentEndTime = 0;
         let currentDuration = 0;
@@ -972,7 +1022,7 @@
             activeSongNum = num;
             let conf = songsConfig[num];
 
-            audio.src = conf.src;
+            audio.src = conf.src + "?t=" + new Date().getTime(); // يمنع التخزين المؤقت للأغاني القديمة
             audio.load();
 
             audio.onerror = function () {
@@ -1048,10 +1098,23 @@
                 if (lyricsScroll) {
                     const lines = lyricsScroll.children;
                     if (lines.length > 0 && currentProgress >= 0) {
-                        let syncProgress = currentProgress - currentSyncDelay;
-                        if (syncProgress < 0) syncProgress = 0;
-                        let activeIndex = Math.floor((syncProgress / currentSyncDuration) * lines.length) || 0;
-                        if (activeIndex >= lines.length) activeIndex = lines.length - 1;
+                        let activeIndex = 0;
+                        if(parsedLrc[activeSongNum]) {
+                            let currentTime = audio.currentTime;
+                            let lrcArray = parsedLrc[activeSongNum];
+                            for(let i = 0; i < lrcArray.length; i++) {
+                                if(currentTime >= lrcArray[i].time) {
+                                    activeIndex = i;
+                                } else {
+                                    break;
+                                }
+                            }
+                        } else {
+                            let syncProgress = currentProgress - currentSyncDelay;
+                            if (syncProgress < 0) syncProgress = 0;
+                            activeIndex = Math.floor((syncProgress / currentSyncDuration) * lines.length) || 0;
+                            if (activeIndex >= lines.length) activeIndex = lines.length - 1;
+                        }
 
                         for (let i = 0; i < lines.length; i++) {
                             if (i === activeIndex) {
