@@ -906,7 +906,8 @@
             audio.currentTime = currentStartTime;
             document.getElementById('player-box').style.display = 'none';
             document.getElementById('gift-options').style.display = 'flex';
-            document.getElementById('gift-prompt').style.display = 'block';
+            document.getElementById('s4_title').style.display = 'block';
+            document.getElementById('s4_p').style.display = 'block';
         }
 
         function chooseGift(num) {
@@ -917,7 +918,8 @@
             }
 
             document.getElementById('gift-options').style.display = 'none';
-            document.getElementById('gift-prompt').style.display = 'none';
+            document.getElementById('s4_title').style.display = 'none';
+            document.getElementById('s4_p').style.display = 'none';
             document.getElementById('player-box').style.display = 'block';
             document.getElementById('gift-title').innerText = 'هدية رقم ' + num + ' 💌';
 
