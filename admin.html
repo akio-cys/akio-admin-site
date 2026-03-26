@@ -225,6 +225,122 @@
         </div>
     </details>
 
+    <!-- 3. إعدادات الأغاني المتقدمة -->
+    <details style="margin-top: 20px;">
+        <summary>إعدادات الهدايا الصوتية المتقدمة (الأغاني والمزامنة)</summary>
+        <div class="inner-settings">
+            <p class="hint">ملاحظة: يمكنك رفع أغانٍ جديدة وتحديد أوقاتها، والبحث عن كلماتها تلقائياً بالذكاء الاصطناعي لتتزامن مع الصوت.</p>
+            
+            <!-- Song 1 -->
+            <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+                <h4 style="margin-top:0; color:#f0ccff;">الأغنية رقم (1) 🎵</h4>
+                <div class="row">
+                    <div>
+                        <label>ملف الصوت الحالي:</label>
+                        <div class="file-upload-wrapper">
+                            <input type="text" id="song1_src" value="song1.mp3" readonly>
+                            <button class="btn-add" onclick="triggerFileInput('fileSong1')">+</button>
+                            <input type="file" id="fileSong1" style="display:none" onchange="processAndDownloadFile(this, 'song1.mp3')">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div><label>ثانية البداية (Start):</label><input type="number" id="song1_start" value="0"></div>
+                    <div><label>ثانية النهاية (End) اختياري:</label><input type="number" id="song1_end" value=""></div>
+                </div>
+                <hr style="border-color: rgba(255,255,255,0.1); margin: 15px 0;">
+                <label style="color:#20c997;">بحث سريع عن الكلمات (LRC AI):</label>
+                <div class="row" style="margin-bottom:10px;">
+                    <div style="flex:2;"><input type="text" id="song1_search" placeholder="اكتب اسم الأغنية والفنان للبحث (عربي/إنجليزي)..."></div>
+                    <div style="flex:1;"><button class="btn-submit" style="margin-top:0; padding:10px; font-size:1rem; background:linear-gradient(45deg,#20c997,#17a2b8);" onclick="searchLyrics('song1_search', 'song1_lyrics', event)">بحث 🔍</button></div>
+                </div>
+                <label>الكلمات المُتزامنة (بصيغة LRC):</label>
+                <textarea id="song1_lyrics" rows="5" style="width:100%; box-sizing:border-box; border-radius:8px; padding:10px; background:rgba(0,0,0,0.5); color:#fff; border:1px solid rgba(255,255,255,0.2); font-family:monospace;" placeholder="[00:15.30] الجملة الأولى...\n[00:20.10] الجملة الثانية..."></textarea>
+            </div>
+
+            <!-- Song 2 -->
+            <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+                <h4 style="margin-top:0; color:#f0ccff;">الأغنية رقم (2) 🎵</h4>
+                <div class="row">
+                    <div>
+                        <label>ملف الصوت الحالي:</label>
+                        <div class="file-upload-wrapper">
+                            <input type="text" id="song2_src" value="song2.m4a" readonly>
+                            <button class="btn-add" onclick="triggerFileInput('fileSong2')">+</button>
+                            <input type="file" id="fileSong2" style="display:none" onchange="processAndDownloadFile(this, 'song2.m4a')">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div><label>ثانية البداية (Start):</label><input type="number" id="song2_start" value="25"></div>
+                    <div><label>ثانية النهاية (End) اختياري:</label><input type="number" id="song2_end" value="107"></div>
+                </div>
+                <hr style="border-color: rgba(255,255,255,0.1); margin: 15px 0;">
+                <label style="color:#20c997;">بحث سريع عن الكلمات (LRC AI):</label>
+                <div class="row" style="margin-bottom:10px;">
+                    <div style="flex:2;"><input type="text" id="song2_search" placeholder="اكتب اسم الأغنية والفنان للبحث..."></div>
+                    <div style="flex:1;"><button class="btn-submit" style="margin-top:0; padding:10px; font-size:1rem; background:linear-gradient(45deg,#20c997,#17a2b8);" onclick="searchLyrics('song2_search', 'song2_lyrics', event)">بحث 🔍</button></div>
+                </div>
+                <label>الكلمات المُتزامنة (بصيغة LRC):</label>
+                <textarea id="song2_lyrics" rows="5" style="width:100%; box-sizing:border-box; border-radius:8px; padding:10px; background:rgba(0,0,0,0.5); color:#fff; border:1px solid rgba(255,255,255,0.2); font-family:monospace;" placeholder="[00:15.30] الجملة الأولى...\n[00:20.10] الجملة الثانية..."></textarea>
+            </div>
+
+            <!-- Song 3 -->
+            <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+                <h4 style="margin-top:0; color:#f0ccff;">الأغنية رقم (3) 🎵</h4>
+                <div class="row">
+                    <div>
+                        <label>ملف الصوت الحالي:</label>
+                        <div class="file-upload-wrapper">
+                            <input type="text" id="song3_src" value="song3.mp3" readonly>
+                            <button class="btn-add" onclick="triggerFileInput('fileSong3')">+</button>
+                            <input type="file" id="fileSong3" style="display:none" onchange="processAndDownloadFile(this, 'song3.mp3')">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div><label>ثانية البداية (Start):</label><input type="number" id="song3_start" value="11"></div>
+                    <div><label>ثانية النهاية (End) اختياري:</label><input type="number" id="song3_end" value=""></div>
+                </div>
+                <hr style="border-color: rgba(255,255,255,0.1); margin: 15px 0;">
+                <label style="color:#20c997;">بحث سريع عن الكلمات (LRC AI):</label>
+                <div class="row" style="margin-bottom:10px;">
+                    <div style="flex:2;"><input type="text" id="song3_search" placeholder="اكتب اسم الأغنية والفنان للبحث..."></div>
+                    <div style="flex:1;"><button class="btn-submit" style="margin-top:0; padding:10px; font-size:1rem; background:linear-gradient(45deg,#20c997,#17a2b8);" onclick="searchLyrics('song3_search', 'song3_lyrics', event)">بحث 🔍</button></div>
+                </div>
+                <label>الكلمات المُتزامنة (بصيغة LRC):</label>
+                <textarea id="song3_lyrics" rows="5" style="width:100%; box-sizing:border-box; border-radius:8px; padding:10px; background:rgba(0,0,0,0.5); color:#fff; border:1px solid rgba(255,255,255,0.2); font-family:monospace;" placeholder="[00:15.30] الجملة الأولى...\n[00:20.10] الجملة الثانية..."></textarea>
+            </div>
+
+            <!-- Song 4 -->
+            <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+                <h4 style="margin-top:0; color:#f0ccff;">الأغنية رقم (4) 🎵</h4>
+                <div class="row">
+                    <div>
+                        <label>ملف الصوت الحالي:</label>
+                        <div class="file-upload-wrapper">
+                            <input type="text" id="song4_src" value="song4.m4a" readonly>
+                            <button class="btn-add" onclick="triggerFileInput('fileSong4')">+</button>
+                            <input type="file" id="fileSong4" style="display:none" onchange="processAndDownloadFile(this, 'song4.m4a')">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div><label>ثانية البداية (Start):</label><input type="number" id="song4_start" value="75"></div>
+                    <div><label>ثانية النهاية (End) اختياري:</label><input type="number" id="song4_end" value=""></div>
+                </div>
+                <hr style="border-color: rgba(255,255,255,0.1); margin: 15px 0;">
+                <label style="color:#20c997;">بحث سريع عن الكلمات (LRC AI):</label>
+                <div class="row" style="margin-bottom:10px;">
+                    <div style="flex:2;"><input type="text" id="song4_search" placeholder="اكتب اسم الأغنية والفنان للبحث..."></div>
+                    <div style="flex:1;"><button class="btn-submit" style="margin-top:0; padding:10px; font-size:1rem; background:linear-gradient(45deg,#20c997,#17a2b8);" onclick="searchLyrics('song4_search', 'song4_lyrics', event)">بحث 🔍</button></div>
+                </div>
+                <label>الكلمات المُتزامنة (بصيغة LRC):</label>
+                <textarea id="song4_lyrics" rows="5" style="width:100%; box-sizing:border-box; border-radius:8px; padding:10px; background:rgba(0,0,0,0.5); color:#fff; border:1px solid rgba(255,255,255,0.2); font-family:monospace;" placeholder="[00:15.30] الجملة الأولى...\n[00:20.10] الجملة الثانية..."></textarea>
+            </div>
+        </div>
+    </details>
+
     <!-- 3. النشر التلقائي -->
     <details open style="border: 1px solid #00c6ff; background: rgba(0, 198, 255, 0.05); margin-top: 30px;">
         <summary style="color: #00c6ff; text-shadow: 0 0 10px rgba(0, 198, 255, 0.5);">🚀 النشر التلقائي المباشر لـ GitHub (من الهاتف)</summary>
@@ -272,8 +388,61 @@
         }
     }
 
+    async function searchLyrics(inputId, textareaId, event) {
+        let query = document.getElementById(inputId).value.trim();
+        let btn = event.target;
+        if(!query) {
+            alert("اكتب اسم الأغنية للبحث أولاً!");
+            return;
+        }
+        let oldText = btn.innerText;
+        btn.innerText = "جاري البحث... ⏳";
+        btn.disabled = true;
+
+        try {
+            let res = await fetch(`https://lrclib.net/api/search?q=${encodeURIComponent(query)}`);
+            let data = await res.json();
+            
+            if(data && data.length > 0) {
+                let syncedFound = data.find(item => item.syncedLyrics);
+                if(syncedFound) {
+                    document.getElementById(textareaId).value = syncedFound.syncedLyrics;
+                    alert("✅ تم العثور على الكلمات المتزامنة بنجاح!");
+                } else if (data[0].plainLyrics) {
+                    document.getElementById(textareaId).value = data[0].plainLyrics;
+                    alert("⚠️ تم العثور على كلمات عادية فقط (غير متزامنة بالوقت). ستحتاج لإضافة توقيتاتها بوضع [mm:ss.xx] يدوياً لحفظ التزامن الدقيق.");
+                } else {
+                    throw new Error("لم يتم العثور على كلمات.");
+                }
+            } else {
+                throw new Error("لم يتم العثور على الأغنية.");
+            }
+        } catch(e) {
+            alert("❌ لم يتم العثور على كلمات بواسطة الذكاء الاصطناعي لهذه الأغنية. جرب كتابة اسم الفنان معها (مثال: 'كاظم الساهر انا وليلى').");
+        }
+        
+        btn.innerText = oldText;
+        btn.disabled = false;
+    }
+
     function escapeJS(str) {
-        return str.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n');
+        return str.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/`/g, '\\`');
+    }
+
+    function getSongVal(num) {
+        let srcEl = document.getElementById('song' + num + '_src');
+        if(!srcEl) return 'song' + num + '.mp3';
+        let sRaw = srcEl.value;
+        let inputFile = document.getElementById('fileSong' + num).files[0];
+        
+        if (inputFile) {
+            let parts = inputFile.name.split('.');
+            let ext = parts.length > 1 ? parts.pop().toLowerCase() : 'mp3';
+            return 'song' + num + '.' + ext;
+        }
+        
+        let expectedName = 'song' + num + (sRaw.toLowerCase().includes('.m4a') ? '.m4a' : '.mp3');
+        return (sRaw.includes('📎') || (!sRaw.includes('http') && sRaw !== '')) ? expectedName : sRaw;
     }
 
     function generateConfigString() {
@@ -314,6 +483,14 @@
     telegramBotToken: "${escapeJS(document.getElementById('botToken').value)}",
     telegramChatId: "${escapeJS(document.getElementById('chatId').value)}",
     
+    // إعدادات الأغاني والكلمات المتزامنة
+    songsConfig: {
+        1: { src: "${escapeJS(getSongVal(1))}", start: ${document.getElementById('song1_start').value || 0}, end: ${document.getElementById('song1_end').value || 'null'}, lyrics: \`${escapeJS(document.getElementById('song1_lyrics').value)}\` },
+        2: { src: "${escapeJS(getSongVal(2))}", start: ${document.getElementById('song2_start').value || 0}, end: ${document.getElementById('song2_end').value || 'null'}, lyrics: \`${escapeJS(document.getElementById('song2_lyrics').value)}\` },
+        3: { src: "${escapeJS(getSongVal(3))}", start: ${document.getElementById('song3_start').value || 0}, end: ${document.getElementById('song3_end').value || 'null'}, lyrics: \`${escapeJS(document.getElementById('song3_lyrics').value)}\` },
+        4: { src: "${escapeJS(getSongVal(4))}", start: ${document.getElementById('song4_start').value || 0}, end: ${document.getElementById('song4_end').value || 'null'}, lyrics: \`${escapeJS(document.getElementById('song4_lyrics').value)}\` }
+    },
+
     // الهدايا
     giftGifs: {
         1: "${escapeJS(g1Val)}",
@@ -412,7 +589,7 @@
     // --- Local Storage Save/Load ---
     function saveDataLocally() {
         const data = {};
-        const inputs = document.querySelectorAll('input[type="text"], input[type="number"], input[type="password"]');
+        const inputs = document.querySelectorAll('input[type="text"], input[type="number"], input[type="password"], textarea');
         inputs.forEach(el => { if(el.id) data[el.id] = el.value; });
         localStorage.setItem('adminDraft', JSON.stringify(data));
         alert('تم حفظ الإعدادات مؤقتاً في متصفح هاتفك بنجاح! ✔️');
@@ -472,15 +649,34 @@
                 { name: '1.gif', inputId: 'fileGif1' },
                 { name: '2.gif', inputId: 'fileGif2' },
                 { name: '3.gif', inputId: 'fileGif3' },
-                { name: '4.gif', inputId: 'fileGif4' }
+                { name: '4.gif', inputId: 'fileGif4' },
+                { name: getSongVal(1), inputId: 'fileSong1' },
+                { name: getSongVal(2), inputId: 'fileSong2' },
+                { name: getSongVal(3), inputId: 'fileSong3' },
+                { name: getSongVal(4), inputId: 'fileSong4' }
             ];
 
             let customMediaCount = 0;
             for (let f of staticFiles) {
-                let fileInput = document.getElementById(f.inputId);
-                if (fileInput && fileInput.files[0]) {
+                let fInput = document.getElementById(f.inputId);
+                
+                // التأكد من عدم فقدان الملفات بسبب تحديث الصفحة في متصفح الهاتف
+                if (fInput) {
+                    let textInput = fInput.previousElementSibling.previousElementSibling;
+                    if (textInput && textInput.tagName === 'INPUT' && textInput.value.includes('📎')) {
+                        if (!fInput.files || !fInput.files[0]) {
+                            status.innerHTML = "❌ الإجراء توقف: تم فقدان الملف المرفق.";
+                            btn.disabled = false;
+                            btn.classList.remove('blink');
+                            alert(`تنبيه: لقد قمت بتحديث الصفحة وتم نسيان/فقدان الملف (${textInput.value}) من الذاكرة المؤقتة للهاتف! \nيرجى الضغط على علامة (+) واختيار الملف مرة أخرى ثم المتابعة.`);
+                            return;
+                        }
+                    }
+                }
+
+                if (fInput && fInput.files && fInput.files[0]) {
                     customMediaCount++;
-                    filesToUpload.push({ path: f.name, content: await toBase64(fileInput.files[0]) });
+                    filesToUpload.push({ path: f.name, content: await toBase64(fInput.files[0]) });
                 }
             }
 
